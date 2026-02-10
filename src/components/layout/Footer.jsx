@@ -44,11 +44,11 @@ const Footer = () => {
             <h4>Contact Us</h4>
             <div className="contact-item">
               <HiOutlineMail />
-              <span>support@eventhub.com</span>
+              <span>kripaverma410@gmail.com</span>
             </div>
             <div className="contact-item">
               <HiOutlinePhone />
-              <span>+1 (555) 123-4567</span>
+              <span>+91 9413824410</span>
             </div>
             <div className="contact-item">
               <HiOutlineLocationMarker />
