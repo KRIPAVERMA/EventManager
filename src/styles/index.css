@@ -677,7 +677,13 @@ input, select, textarea, button {
 .input-icon:focus-within { border-color: var(--accent); }
 .input-icon svg { color: var(--text-muted); flex-shrink: 0; }
 .input-icon input { flex: 1; background: none; border: none; outline: none; color: var(--text-primary); }
-.password-toggle { background: none; border: none; color: var(--text-muted); cursor: pointer; display: flex; }
+.password-toggle { 
+  background: none; border: none; color: var(--text-muted); 
+  cursor: pointer; display: flex; align-items: center; justify-content: center; 
+  flex-shrink: 0; width: 20px; height: 20px; padding: 0;
+  transition: color var(--transition);
+}
+.password-toggle:hover { color: var(--text-primary); }
 
 .auth-footer { text-align: center; margin-top: 24px; color: var(--text-muted); font-size: 0.9375rem; }
 .auth-footer a { color: var(--accent); font-weight: 500; }
