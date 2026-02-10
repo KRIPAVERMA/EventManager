@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import API from '../api/axios';
 import EventCard from '../components/events/EventCard';
@@ -35,6 +35,9 @@ const EventsPage = () => {
     sort: searchParams.get('sort') || '',
     page: parseInt(searchParams.get('page')) || 1,
   });
+
+  const [searchInput, setSearchInput] = useState(searchParams.get('search') || '');
+  const debounceRef = useRef(null);
 
   const fetchEvents = useCallback(async () => {
     setLoading(true);
@@ -73,10 +76,20 @@ const EventsPage = () => {
   }, [filters, fetchEvents]);
 
   const updateFilter = (key, value) => {
+    if (key === 'search') {
+      setSearchInput(value);
+      clearTimeout(debounceRef.current);
+      debounceRef.current = setTimeout(() => {
+        setFilters((prev) => ({ ...prev, search: value, page: 1 }));
+      }, 400);
+      return;
+    }
     setFilters((prev) => ({ ...prev, [key]: value, page: key === 'page' ? value : 1 }));
   };
 
   const clearFilters = () => {
+    setSearchInput('');
+    clearTimeout(debounceRef.current);
     setFilters({
       search: '', category: '', city: '', startDate: '', endDate: '',
       minPrice: '', maxPrice: '', sort: '', page: 1,
@@ -103,10 +116,16 @@ const EventsPage = () => {
             <input
               type="text"
               placeholder="Search events..."
-              value={filters.search}
+              value={searchInput}
               onChange={(e) => updateFilter('search', e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  clearTimeout(debounceRef.current);
+                  setFilters((prev) => ({ ...prev, search: searchInput, page: 1 }));
+                }
+              }}
             />
-            {filters.search && (
+            {searchInput && (
               <button className="clear-input" onClick={() => updateFilter('search', '')}>
                 <HiOutlineX />
               </button>

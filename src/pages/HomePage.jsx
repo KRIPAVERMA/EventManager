@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import API from '../api/axios';
 import EventCard from '../components/events/EventCard';
 import LoadingSpinner from '../components/common/LoadingSpinner';
@@ -44,7 +44,7 @@ const HomePage = () => {
   const handleSearch = (e) => {
     e.preventDefault();
     if (search.trim()) {
-      window.location.href = `/events?search=${encodeURIComponent(search.trim())}`;
+      navigate(`/events?search=${encodeURIComponent(search.trim())}`);
     }
   };
 
