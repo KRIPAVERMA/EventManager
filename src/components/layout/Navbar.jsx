@@ -100,6 +100,14 @@ const Navbar = () => {
         </div>
 
         <div className="navbar-actions">
+          <button
+            className="mobile-toggle"
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label="Toggle menu"
+          >
+            {mobileOpen ? <HiOutlineX size={24} /> : <HiOutlineMenu size={24} />}
+          </button>
+
           {isAuthenticated ? (
             <div className="user-dropdown" ref={dropdownRef}>
               <button
@@ -147,14 +155,6 @@ const Navbar = () => {
               </Link>
             </div>
           )}
-
-          <button
-            className="mobile-toggle"
-            onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label="Toggle menu"
-          >
-            {mobileOpen ? <HiOutlineX size={24} /> : <HiOutlineMenu size={24} />}
-          </button>
         </div>
       </div>
     </nav>
