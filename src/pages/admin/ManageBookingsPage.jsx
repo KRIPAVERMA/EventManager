@@ -74,8 +74,8 @@ const ManageBookingsPage = () => {
         </div>
       ) : (
         <>
-          <div className="admin-table">
-            <div className="admin-table-header">
+          <div className="admin-table admin-table-bookings">
+            <div className="admin-table-header admin-table-header-bookings">
               <span>Booking</span>
               <span>User</span>
               <span>Event</span>
@@ -84,17 +84,17 @@ const ManageBookingsPage = () => {
               <span>Actions</span>
             </div>
             {bookings.map((booking) => (
-              <div key={booking._id} className="admin-table-row">
+              <div key={booking._id} className="admin-table-row admin-table-row-bookings">
                 <div className="table-cell">
-                  <span className="text-sm">#{booking._id?.slice(-8)}</span>
+                  <span className="text-sm fw-medium">#{booking._id?.slice(-8)}</span>
                   <span className="text-sm text-muted">{format(new Date(booking.createdAt), 'MMM dd, yyyy')}</span>
                 </div>
                 <div className="table-cell">
-                  <span>{booking.user?.name}</span>
+                  <span className="fw-medium">{booking.user?.name}</span>
                   <span className="text-sm text-muted">{booking.user?.email}</span>
                 </div>
                 <div className="table-cell">
-                  <span>{booking.event?.title}</span>
+                  <span className="fw-medium">{booking.event?.title}</span>
                 </div>
                 <div className="table-cell">
                   <span className="fw-medium">${booking.totalAmount?.toFixed(2)}</span>
